@@ -24,8 +24,28 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.jar {
+    archiveFileName.set("404.jar")
+    manifest {
+        attributes["Main-Class"] = "ru.israpil.bot404.MainKt"
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from(sourceSets.main.get().output)
+
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks.create("stage") {
+    dependsOn("clean", "build", "jar")
 }
 
 application {

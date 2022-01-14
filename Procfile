@@ -1,1 +1,1 @@
-worker: ./gradlew run
+worker: java -jar build/libs/404.jar
