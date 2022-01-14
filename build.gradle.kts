@@ -45,7 +45,8 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.create("stage") {
-    dependsOn("clean", "build", "jar")
+    dependsOn("clean", "jar")
+    tasks.jar.get().mustRunAfter("clean")
 }
 
 application {
