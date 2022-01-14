@@ -29,5 +29,5 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("ru.israpil.bot404.MainKt")
 }
